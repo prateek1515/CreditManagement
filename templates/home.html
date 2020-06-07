@@ -1,17 +1,21 @@
 <head>
-  
-<!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
-
-
+  <!-- Latest compiled and minified CSS -->
+  {% load static %}
+  <link rel="stylesheet" href="{% static 'app/home.css' %}">
+<link rel="stylesheet" href="{% static 'app/css/bootstrap.min.css' %}">
+<script src="{% static 'app/js/bootstrap.min.js' %}"></script>
 </head>
 <body>
-    <h1 class="text-center">CREDIT MANAGEMENT</h1>
+  
+  <div class="jumbotron text-center">
+    <h1>CREDIT MANAGEMENT</h1>
+  </div>
+<div style="margin-left: 30px; margin-right: 30px;">
     <div class="jumbotron">
-    <h3>CLICK HERE TO GET LIST OF ALL USERS</h3><br><br>
-      <p class="lead">
-          <a class="btn btn-primary btn-lg" href="add" role="button">VIEW ALL USER</a>
+    <h2 class="text-center" >CLICK BELOW TO GET LIST OF ALL USERS</h2><br><br>
+      <p class="lead text-center">
+          <a class="btn btn-primary btn-lg" href="home/add" role="button">VIEW ALL USER</a>
         </p>
       </div>
-    
+</div>    
 </body>

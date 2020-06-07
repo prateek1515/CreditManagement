@@ -17,6 +17,7 @@ from django.contrib import admin
 from django.conf.urls import url
 from django.urls import path
 from app import views
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('home/',views.home),
@@ -26,4 +27,7 @@ urlpatterns = [
     url(r'^home/(?P<id>\d+)',views.addc),
     url(r'^add/(?P<id>\d+)',views.sucess),
     path('home/list',views.add),
+    url(r'^home/h/(?P<id>\d+)',views.GeneratePdf.as_view()),
+    url(r'^$',views.home,name='home'),
 ]
+urlpatterns += staticfiles_urlpatterns()

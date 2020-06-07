@@ -1,44 +1,102 @@
 <head>
-  
-    <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
-    
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>    
+  <!-- Latest compiled and minified CSS -->
+  {% load static %}
+  <link rel="stylesheet" href="{% static 'app/cred.css' %}">
+<link rel="stylesheet" href="{% static 'app/css/bootstrap.min.css' %}">
+<script src="{% static 'app/js/bootstrap.min.js' %}"></script>
 </head>
 <body>
+<div>
 
-    <h1>Name of Person</h1>
-{% for i in obj %}
- <h2>{{i.name | capfirst}}</h2>
- {% endfor %}
+        <h1>   Name of Person : 
+        {% for Person in Person_list %}
+        {{Person.name | capfirst}}
+        {% endfor %}
+        </h1>
+        <h1>Present Credits: 
+        {% for Person in Person_list %}
+        {{Person.credit}}
+        {% endfor %}
+        </h1>
+</div>
 <br>
-<h1>Present Credits </h1>
-{% for i in obj %}
- <h2>{{i.credit}}</h2>
- {% endfor %}
 <br>
-<br>
-<h2>SELECT TO WHICH USER YOU HAVE TO TRANSFER CREDIT</h2>
+<h2>TRANSFER CREDIT:</h2>
 <br>
 <button type="button" class="btn btn-sucess">
- 
+ <div class="input">
       
 <form method="POST">
-    {{ form.as_p }}
+    <h3>{{ form }}
     {% csrf_token %}
+    </h3>
     
-      <input type="submit" value="sub">
+    <button type="submit" class="btn btn-success" style="margin-right:500px; font-size: 30px; ">Submit</button>
 
-      {% if err %}
-         <h3>You do not have sufficient credits</h3>
-      {% endif %}
-
-      {% if errMsg %}
-         <h3>{{ errMsg }}</h3>
-      {% endif %}
+      
 </form>
+</div>
+{% if err %}
+         <h3 class="alert alert-danger">You do not have sufficient credits<3h3>
+{% endif %}
+
+{% if errMsg %}
+         <h3 class="alert alert-danger">{{ errMsg }}</h3>
+      {% endif %}
+{% for Person in Person_list %}<br>
+<br>
+<div> 
+<h3>Click Below To Download Previous Transaction As Pdf</h3>
+<br>
+<button class="btn btn-success"><a href="h/{{Person.id}}" style="text-decoration: none; color: white;">DOWNLOAD AS PDF</a></button>
+</div>
+{% endfor %}
+<br>
+<br>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>DATE</th>
+            <th>TYPE</th>
+            <th>FROM</th>
+            <th>TO</th>
+            <th>PRESENT CREDITS</th>
+            <th>Credit Transferred</th>
+            
+          </tr>
+        </thead>
+        <tbody>
+            {% for Transaction in Transactions %}
+          <tr>
+              <td>{{Transaction.Time}}</td>
+              <td>{% if Transaction.Sender in names %}
+                  Debit
+                  {% else %}
+                  Credit
+                  {% endif %}
+              </td>
+              <td>{{Transaction.Sender| capfirst}}
+              </td>
+              <td>
+                {{ Transaction.Reciever| capfirst}}
+                
+              </td>
+              <td>{% if Transaction.Sender in names %}
+                {{Transaction.Sender_Credit}}
+                {% else %}
+                {{Transaction.Reciever_Credit}}
+                {% endif %}
+                
+              </td>
+              <td>
+                {{Transaction.Credit}}
+              </td>
+              
+            <tr>
+              
+        
+          {% endfor %}
+        </tbody>
+      </table>
 </body>
 

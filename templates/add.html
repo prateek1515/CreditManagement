@@ -1,16 +1,15 @@
-
 <head>
-  
-    <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
-    
-    
-    </head>
+  <!-- Latest compiled and minified CSS -->
+  {% load static %}
+  <link rel="stylesheet" href="{% static 'app/add.css' %}">
+<link rel="stylesheet" href="{% static 'app/css/bootstrap.min.css' %}">
+<script src="{% static 'app/js/bootstrap.min.js' %}"></script>
+</head>
     
     <body>
-    
+  
 <div class="container">
-    <h2>Basic Table</h2>
+    <h1 style="margin-left: 25%;">NAMES OF ALL USERS</h1>
     <table class="table">
       <thead>
         <tr>
@@ -19,11 +18,11 @@
         </tr>
       </thead>
       <tbody>
-          {% for i in obj %}
+          {% for Person in Person_list_details %}
         <tr>
             
-          <td><a href="{{i.id}}">{{i.name}}</a></td>
-          <td>{{i.credit}}</td>
+          <td><a href="{{Person.id}}" style="text-decoration: none; color: black;">{{Person.name|capfirst}}</a></td>
+          <td>{{Person.credit}}</td>
         </tr>
         {% endfor %}
       </tbody>

@@ -1,9 +1,9 @@
 from django import forms
 from .models import Person
 from django.core.exceptions import ValidationError
+from django.core.validators import MaxValueValidator, MinValueValidator 
 
 def validate_credit(value):
-    print(value)
     if value < 0:
         raise ValidationError("Enter some positive amount")
 
@@ -11,6 +11,13 @@ class getid:
     def __init__(self,id):
         self.id=id
     
+def getAllOptions():
+    det=Person.objects.all().values()
+    options = []
+    for (index,item) in enumerate(det):
+        options.append((item['id'],item['name']))
+    return options
+
 
 def gett(*argv):
     try:
@@ -26,17 +33,15 @@ def gett(*argv):
                 options.append((item['id'],item['name']))
     except Exception as e:
         print(e)
-
-    print(options)
+    
     return options
 
 class formname(forms.Form):
 
-    cred=forms.IntegerField(validators=[validate_credit])
-    Transfer_to=forms.ChoiceField(choices=())
+    cred=forms.IntegerField(validators=[MinValueValidator(1)])
+    Transfer_to=forms.ChoiceField(choices=(getAllOptions()))
 
     def getform(self,id):
-        print(id)
         self.fields["Transfer_to"]=forms.ChoiceField(choices=(gett(id)))
         
     # cred=forms.IntegerField(validators=[validate_credit])

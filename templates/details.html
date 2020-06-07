@@ -2,12 +2,12 @@
 <p>{{i}}</p>
 {% endfor %} -->
 <head>
-  
-    <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
-    
-    
-    </head>
+  <!-- Latest compiled and minified CSS -->
+  {% load static %}
+
+<link rel="stylesheet" href="{% static 'app/css/bootstrap.min.css' %}">
+<script src="{% static 'app/js/bootstrap.min.js' %}"></script>
+</head>
     <body>
         <div class="row">
             <div class="col-sm-4">
